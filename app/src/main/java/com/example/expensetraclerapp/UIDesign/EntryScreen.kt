@@ -49,7 +49,7 @@ fun EntryScreen() {
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
-                .background(Color.Black)
+                .background(Color(0xBF1E0634))
                 .height(185.dp)
                 .padding(28.dp),
             verticalArrangement = Arrangement.SpaceEvenly,
