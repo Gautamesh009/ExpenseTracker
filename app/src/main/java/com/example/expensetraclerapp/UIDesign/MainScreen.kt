@@ -37,11 +37,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import kotlinx.coroutines.flow.combine
 
-@Preview
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
     Scaffold(
         content = {
             Column(modifier = Modifier
@@ -60,7 +60,9 @@ fun MainScreen() {
                     Text("Expense Tracker", fontSize = 34.sp)
                     Spacer(Modifier.width(40.dp))
                     IconButton(
-                        onClick = {},
+                        onClick = {
+                            navController.navigate("Settings")
+                        },
                         Modifier.size(50.dp)
                             .background(Color(0x0DFC8080), RoundedCornerShape(100))
                             .border(

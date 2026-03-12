@@ -27,10 +27,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
-@Preview
 @Composable
-fun EntryScreen() {
+fun EntryScreen(navController: NavController) {
     val myValue = remember {
         mutableStateOf("")
     }
@@ -64,7 +64,9 @@ fun EntryScreen() {
             Spacer(modifier = Modifier.height(10.dp))
 
             FilledTonalButton(
-                onClick = {}
+                onClick = {
+                    navController.navigate("MainScreen")
+                }
             ) {
                 Text("Get Started")
             }

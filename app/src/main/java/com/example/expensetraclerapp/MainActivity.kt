@@ -11,6 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.expensetraclerapp.UIDesign.EntryScreen
+import com.example.expensetraclerapp.UIDesign.MainScreen
+import com.example.expensetraclerapp.UIDesign.Settings
 import com.example.expensetraclerapp.ui.theme.ExpenseTraclerAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +25,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ExpenseTraclerAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun Navigation() {
+    val navController = rememberNavController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ExpenseTraclerAppTheme {
-        Greeting("Android")
+    NavHost(navController, startDestination = "MainScreen") {
+        composable("EntryScreen") { EntryScreen(navController) }
+        composable("MainScreen") { MainScreen(navController) }
+        composable("Settings") { Settings(navController) }
     }
 }
