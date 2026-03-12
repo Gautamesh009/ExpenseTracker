@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
+            Navigation()
         }
     }
 }
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = "MainScreen") {
+    NavHost(navController, startDestination = "EntryScreen") {
         composable("EntryScreen") { EntryScreen(navController) }
         composable("MainScreen") { MainScreen(navController) }
         composable("Settings") { Settings(navController) }
