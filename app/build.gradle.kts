@@ -70,4 +70,26 @@ dependencies {
     // Optional extras
     testImplementation("androidx.room:room-testing:2.8.4")
     implementation("androidx.room:room-rxjava3:2.8.4")
+
+    //ViewModel dependencies
+    val lifecycle_version = "2.8.4"
+
+    // Core ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+
+    // Kotlin extensions + coroutines support
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+
+    // Lifecycle runtime (needed for coroutines + LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+
+    // Optional: LiveData support
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
+    // Optional: SavedStateHandle support
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+
+    // Optional: Testing
+    testImplementation("androidx.arch.core:core-testing:$lifecycle_version")
+
 }
