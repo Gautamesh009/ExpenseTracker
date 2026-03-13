@@ -19,13 +19,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +45,9 @@ import com.example.expensetraclerapp.ViewModel.TrackerViewModel
 @Composable
 fun MainScreen(navController: NavController, viewModel: TrackerViewModel) {
     val payments by viewModel.allPayments.collectAsState()
+    val textFieldMoney = remember {
+        mutableStateOf("")
+    }
 
     Scaffold(
         content = {
@@ -121,6 +128,32 @@ fun MainScreen(navController: NavController, viewModel: TrackerViewModel) {
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    OutlinedTextField(
+                        value = textFieldMoney.value,
+                        onValueChange = {
+                            textFieldMoney.value = it
+                        },
+                        label = {
+                            Text("Enter Spend")
+                        }
+                    )
+                    Spacer(Modifier.width(5.dp))
+                    ExtendedFloatingActionButton(
+                        onClick = {
+
+                        }
+                    ) {
+                        Text("Save")
+                    }
+                }
+
                 Spacer(Modifier.height(20.dp))
                 Text("     History:", fontSize = 24.sp)
                 Spacer(Modifier.height(1.dp))
