@@ -34,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -240,7 +241,8 @@ fun Settings(navController: NavController) {
 
 @Composable
 fun SetBal() {
-    val setBal = remember { mutableStateOf("") }
+    var textFieldValue by rememberSaveable { mutableStateOf("") }
+    var setBal by rememberSaveable { mutableStateOf("0") }
     Column(
         modifier = Modifier.fillMaxWidth()
             .padding(16.dp),
@@ -253,9 +255,9 @@ fun SetBal() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             TextField(
-                value = setBal.value,
+                value = textFieldValue,
                 onValueChange = {
-                    setBal.value = it
+                    textFieldValue = it
                 },
                 label = {
                     Text("Set Balance")
@@ -265,7 +267,9 @@ fun SetBal() {
             )
             Spacer(Modifier.width(10.dp))
             ExtendedFloatingActionButton(
-                onClick = {}
+                onClick = {
+                   setBal = textFieldValue
+                }
             ) {
                 Text("Save")
             }

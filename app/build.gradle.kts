@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id ("kotlin-kapt") // Required for annotation processing
 }
 
 android {
@@ -61,7 +62,12 @@ dependencies {
     //Navigation Dependency
     implementation("androidx.navigation:navigation-compose:2.7.0")
 
+    //RoomDB Dependencies
+    implementation("androidx.room:room-runtime:2.8.4")
+    kapt("androidx.room:room-compiler:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
 
-
-
+    // Optional extras
+    testImplementation("androidx.room:room-testing:2.8.4")
+    implementation("androidx.room:room-rxjava3:2.8.4")
 }
