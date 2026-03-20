@@ -314,7 +314,7 @@ fun Appearance() {
 
 @Composable
 fun SetName() {
-    val setName = remember { mutableStateOf("Unknown") }
+    val setName = remember { mutableStateOf(" ") }
     Column(
         modifier = Modifier.fillMaxWidth()
             .padding(16.dp),

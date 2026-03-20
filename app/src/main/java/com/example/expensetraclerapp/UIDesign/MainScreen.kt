@@ -1,5 +1,6 @@
 package com.example.expensetraclerapp.UIDesign
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -39,12 +40,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.expensetraclerapp.Room.PaymentHistory
 import com.example.expensetraclerapp.ViewModel.TrackerViewModel
 
 @Composable
 fun MainScreen(navController: NavController, viewModel: TrackerViewModel) {
     val payments by viewModel.allPayments.collectAsState()
+    val isDebited = remember { mutableStateOf(false) }
     val textFieldMoney = remember {
         mutableStateOf("")
     }
@@ -153,6 +154,7 @@ fun MainScreen(navController: NavController, viewModel: TrackerViewModel) {
                         Text("Save")
                     }
                 }
+                Spacer(Modifier.height(10.dp))
 
                 Spacer(Modifier.height(20.dp))
                 Text("     History:", fontSize = 24.sp)
@@ -162,34 +164,44 @@ fun MainScreen(navController: NavController, viewModel: TrackerViewModel) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    items(2) {
-                       Card(
-                           shape = RoundedCornerShape(20.dp, 0.dp, 20.dp, 0.dp),
-                           elevation = CardDefaults.elevatedCardElevation(8.dp),
-                           modifier = Modifier.fillMaxWidth(.9f)
-                               .height(90.dp).border(
-                                   2.dp,
-                                   Color.Black,
-                                   RoundedCornerShape(20.dp, 0.dp, 20.dp, 0.dp))
-                       ) {
-                           Column(
-                               modifier = Modifier.fillMaxSize()
-                                   .padding(16.dp),
-                               horizontalAlignment = Alignment.Start,
-                               verticalArrangement = Arrangement.SpaceEvenly
-                           ) {
-                               Row(
-                                   modifier = Modifier.fillMaxWidth(),
-                                   horizontalArrangement = Arrangement.SpaceBetween,
-                                   verticalAlignment = Alignment.CenterVertically
-                               ) {
-                                   Text("Payment Message :", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                                   Text("payment price", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                               }
-                               Spacer(modifier = Modifier.height(5.dp))
-                               Text("Date", fontSize = 10.sp, fontWeight = FontWeight.Light)
-                           }
-                       }
+                    items(payments) {
+                        if(payments.size == 0) {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text("Nothing Right Now!", color = Color.Black, fontSize = 24.sp)
+                            }
+                        } else {
+                            Card(
+                                shape = RoundedCornerShape(20.dp, 0.dp, 20.dp, 0.dp),
+                                elevation = CardDefaults.elevatedCardElevation(8.dp),
+                                modifier = Modifier.fillMaxWidth(.9f)
+                                    .height(90.dp).border(
+                                        2.dp,
+                                        Color.Black,
+                                        RoundedCornerShape(20.dp, 0.dp, 20.dp, 0.dp))
+                            ) {
+                                Column(
+                                    modifier = Modifier.fillMaxSize()
+                                        .padding(16.dp),
+                                    horizontalAlignment = Alignment.Start,
+                                    verticalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text("${it.msg} :", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                                        Text("${it.moneySpend}", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                                    }
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    Text("Date : ${it.time}", fontSize = 10.sp, fontWeight = FontWeight.Light)
+                                }
+                            }
+                        }
                         Spacer(Modifier.height(10.dp))
                     }
                 }
